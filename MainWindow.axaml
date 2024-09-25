@@ -1,0 +1,103 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"  WindowState="Maximized" d:DesignWidth="1920" d:DesignHeight="1080" MaxWidth="1920" MinWidth="1920" MaxHeight="1080" MinHeight="1080"
+        x:Class="Works.MainWindow"
+        Title="Works"
+		x:CompileBindings="False">
+	<Grid>
+		<StackPanel>
+			<TextBlock Margin="70,130,0,0" Text="Id"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock Margin="150,130,0,0" Text="Фото"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock Margin="270,130,0,0" Text="Имя"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock Margin="430,130,0,0" Text="Отчество"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock Margin="570,130,0,0" Text="Фамилия"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock Margin="700,130,0,0" Text="Дата Рождения"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock Margin="860,130,0,0" Text="Регистрация"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock Margin="1050,130,0,0" Text="Номер"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock Margin="1200,130,0,0" Text="Почта"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock Margin="1300,130,0,0" Text="Последний визит"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock Margin="1450,130,0,0" Text="Количество визитов"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBox Margin="100,50,0,0" Width="400" HorizontalAlignment="Left" Watermark="Поиск"></TextBox>
+		</StackPanel>
+		<StackPanel>
+			<ComboBox x:Name="FiltrPol" Margin="100,50,100,0" HorizontalAlignment="Right" SelectionChanged="ComboBox_SelectionChanged">
+				<ComboBoxItem>Все</ComboBoxItem>
+				<ComboBoxItem>Мужчины</ComboBoxItem>
+				<ComboBoxItem>Женщины</ComboBoxItem>
+			</ComboBox>
+		</StackPanel>
+		<StackPanel>
+			<ComboBox x:Name="Filtr" Margin="0,50,250,0" HorizontalAlignment="Right" SelectionChanged="ComboBox_SelectionChanged">
+				<ComboBoxItem>Все</ComboBoxItem>
+				<ComboBoxItem>По Фамилии</ComboBoxItem>
+				<ComboBoxItem>По посещению</ComboBoxItem>
+				<ComboBoxItem>По Дате</ComboBoxItem>
+			</ComboBox>
+		</StackPanel>
+		<ListBox x:Name="ListPers" Width="1800" Height="700">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<StackPanel>
+							<TextBlock Margin="0,40,0,0" Text="{Binding Id}"></TextBlock>
+						</StackPanel>
+						<StackPanel>
+						<Image Height="100" Margin="50,0,0,0" HorizontalAlignment="Left" Width="150"  Source="{Binding photo}"></Image>														
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Margin="200,0,0,0" Text="{Binding Name}"></TextBlock>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Margin="350,0,0,0" Text="{Binding MiddleName}"></TextBlock>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Margin="500,0,0,0" Text="{Binding Surname}"></TextBlock>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Margin="650,0,0,0" Text="{Binding Birthday}"></TextBlock>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Margin="800,0,0,0" Text="{Binding DateRegistr}"></TextBlock>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Margin="950,0,0,0" Text="{Binding NumberPhone}"></TextBlock>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Margin="1100,0,0,0" Text="{Binding EmailAdress}"></TextBlock>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Margin="1250,0,0,0" Text="{Binding Visit}"></TextBlock>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Margin="1400,0,0,0" Text="{Binding ColvoVisit}"></TextBlock>
+						</StackPanel>
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</Grid>
+</Window>
