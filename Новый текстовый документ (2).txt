@@ -1,0 +1,193 @@
+-- DROP SCHEMA public;
+
+CREATE SCHEMA public AUTHORIZATION postgres;
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+-- public.file определение
+
+-- Drop table
+
+-- DROP TABLE public.file;
+
+CREATE TABLE public.file (
+	id int4 NOT NULL,
+	"name" varchar NOT NULL,
+	CONSTRAINT file_pk PRIMARY KEY (id)
+);
+
+-- Permissions
+
+ALTER TABLE public.file OWNER TO user729;
+GRANT ALL ON TABLE public.file TO user729;
+
+
+-- public.file_list определение
+
+-- Drop table
+
+-- DROP TABLE public.file_list;
+
+CREATE TABLE public.file_list (
+	id int4 NOT NULL,
+	id_file int4 NOT NULL,
+	filessilka text NULL,
+	CONSTRAINT file_list_pk PRIMARY KEY (id),
+	CONSTRAINT file_list_unique UNIQUE (id_file)
+);
+
+-- Permissions
+
+ALTER TABLE public.file_list OWNER TO user729;
+GRANT ALL ON TABLE public.file_list TO user729;
+
+
+-- public.gender определение
+
+-- Drop table
+
+-- DROP TABLE public.gender;
+
+CREATE TABLE public.gender (
+	id int4 NOT NULL,
+	"Name" text NOT NULL,
+	CONSTRAINT gender_pk PRIMARY KEY (id)
+);
+
+-- Permissions
+
+ALTER TABLE public.gender OWNER TO user729;
+GRANT ALL ON TABLE public.gender TO user729;
+
+
+-- public.tag определение
+
+-- Drop table
+
+-- DROP TABLE public.tag;
+
+CREATE TABLE public.tag (
+	id int4 NOT NULL,
+	"Name" text NOT NULL,
+	color text NULL,
+	CONSTRAINT tag_pk PRIMARY KEY (id)
+);
+
+-- Permissions
+
+ALTER TABLE public.tag OWNER TO user729;
+GRANT ALL ON TABLE public.tag TO user729;
+
+
+-- public.visit определение
+
+-- Drop table
+
+-- DROP TABLE public.visit;
+
+CREATE TABLE public.visit (
+	id int4 NOT NULL,
+	date_visit date NULL,
+	time_visit time NOT NULL,
+	colvo_visit int4 NULL,
+	CONSTRAINT visit_pk PRIMARY KEY (id)
+);
+
+-- Permissions
+
+ALTER TABLE public.visit OWNER TO user729;
+GRANT ALL ON TABLE public.visit TO user729;
+
+
+-- public.list_tag определение
+
+-- Drop table
+
+-- DROP TABLE public.list_tag;
+
+CREATE TABLE public.list_tag (
+	id int4 NOT NULL,
+	id_tag int4 NULL,
+	id_client int4 NULL,
+	CONSTRAINT list_tag_pk PRIMARY KEY (id),
+	CONSTRAINT list_tag_unique UNIQUE (id_client),
+	CONSTRAINT list_tag_tag_fk FOREIGN KEY (id_tag) REFERENCES public.tag(id)
+);
+
+-- Permissions
+
+ALTER TABLE public.list_tag OWNER TO user729;
+GRANT ALL ON TABLE public.list_tag TO user729;
+
+
+-- public.клиенты определение
+
+-- Drop table
+
+-- DROP TABLE public.клиенты;
+
+CREATE TABLE public.клиенты (
+	id int4 NOT NULL,
+	gender int4 NOT NULL,
+	"name" varchar NOT NULL,
+	surname varchar NOT NULL,
+	middle_name varchar NOT NULL,
+	birthday date NOT NULL,
+	number_phone varchar NOT NULL,
+	email_adress varchar NOT NULL,
+	date_registr date NOT NULL,
+	visit int4 NULL,
+	colvo_visit int4 NULL,
+	tag int4 NULL,
+	photo varchar NULL,
+	files int4 NULL,
+	CONSTRAINT клиенты_pk PRIMARY KEY (id),
+	CONSTRAINT клиенты_unique UNIQUE (visit),
+	CONSTRAINT клиенты_unique_1 UNIQUE (tag),
+	CONSTRAINT клиенты_unique_2 UNIQUE (files)
+);
+
+-- Permissions
+
+ALTER TABLE public.клиенты OWNER TO user729;
+GRANT ALL ON TABLE public.клиенты TO user729;
+
+
+-- public.posehenia определение
+
+-- Drop table
+
+-- DROP TABLE public.posehenia;
+
+CREATE TABLE public.posehenia (
+	id int4 NOT NULL,
+	id_klient int4 NULL,
+	id_posh int4 NULL,
+	CONSTRAINT posehenia_pk PRIMARY KEY (id)
+);
+
+-- Permissions
+
+ALTER TABLE public.posehenia OWNER TO user729;
+GRANT ALL ON TABLE public.posehenia TO user729;
+
+
+-- public.клиенты внешние включи
+
+ALTER TABLE public.клиенты ADD CONSTRAINT клиенты_file_list_fk FOREIGN KEY (files) REFERENCES public.file_list(id);
+ALTER TABLE public.клиенты ADD CONSTRAINT клиенты_gender_fk FOREIGN KEY (gender) REFERENCES public.gender(id);
+ALTER TABLE public.клиенты ADD CONSTRAINT клиенты_list_tag_fk FOREIGN KEY (tag) REFERENCES public.list_tag(id);
+ALTER TABLE public.клиенты ADD CONSTRAINT клиенты_posehenia_fk FOREIGN KEY (visit) REFERENCES public.posehenia(id);
+
+
+-- public.posehenia внешние включи
+
+ALTER TABLE public.posehenia ADD CONSTRAINT posehenia_visit_fk FOREIGN KEY (id_posh) REFERENCES public.visit(id);
+ALTER TABLE public.posehenia ADD CONSTRAINT posehenia_клиенты_fk FOREIGN KEY (id_klient) REFERENCES public.клиенты(id);
+
+
+
+
+-- Permissions
+
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO public;
